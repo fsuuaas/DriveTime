@@ -16,7 +16,9 @@
             <i class="bi bi-house"></i>
             <a href="index.html">Home</a>
         </li>
-        <li class="breadcrumb-item breadcrumb-active" aria-current="page">Sales</li>
+        <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+            @yield('breadcrumb')
+        </li>
     </ol>
     <!-- Breadcrumb end -->
 

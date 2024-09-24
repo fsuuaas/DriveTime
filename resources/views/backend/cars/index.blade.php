@@ -32,6 +32,12 @@
         }
     </style>
 @stop
+@section('title')
+    Cars
+@endsection
+@section('breadcrumb')
+    Cars
+@endsection
 
 @section('main')
     <div class="content-wrapper">
@@ -41,7 +47,7 @@
                 <!-- Card start -->
                 <div class="card" style="padding: 2rem">
                     <div class="card-header">
-                        <div class="card-title">Basic Example</div>
+                        <div class="card-title">Cars</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

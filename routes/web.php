@@ -12,6 +12,10 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/rentals', [PageController::class, 'rentals'])->name('rentals');
+Route::get('/car/details/{id}', [PageController::class, 'carDetails'])->name('car.details');
+
+Route::get('/cars/all', [PageController::class, 'getCars'])->name('cars.all');
+
 
 Auth::routes();
 

@@ -14,4 +14,4 @@
 <link rel="shortcut icon" href="{{asset('backend/images/favicon.svg')}}">
 
 <!-- Title -->
-<title>Bootstrap Admin Dashboards</title>
+<title>@yield('title') | DriveTime</title>

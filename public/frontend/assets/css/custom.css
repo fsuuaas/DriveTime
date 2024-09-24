@@ -1,0 +1,119 @@
+#page-loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    z-index: 9999999;
+    background: #fff;
+    transition: .3s all ease;
+}
+
+[data-x-mode='true'] #page-loader, #page-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+#page-loader.ending {
+    display: none;
+}
+
+#page-loader p {
+    font-weight: 500;
+}
+
+#page-loader * + p {
+    margin-top: 5px;
+}
+
+[data-x-mode="design-mode"] #page-loader {
+    display: none;
+}
+
+#wheel-1,
+#wheel-2 {
+    width: 36px;
+    height: 36px;
+    animation: cssload-spin 1s infinite linear;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+#group-3 {
+    animation: swing 1.5s infinite ease-in-out;
+}
+
+@keyframes cssload-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(1px);
+    }
+    60% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-1px);
+    }
+}
+
+.ml-2{
+    margin-left: 5px;
+}
+
+.reset-btn{
+    padding: 19px 25px;
+    border-radius: 3px;
+    background: #1BB3DA;
+    color: #ffffff;
+    max-height: 56px !important;
+}
+
+.reset-btn:hover{
+    padding: 19px 25px;
+    border-radius: 3px;
+    background: #EC0E2F;
+    color: #ffffff;
+    max-height: 56px !important;
+}
+
+.form-control:hover{
+    border-color: #1BB3DA !important;
+}
+
+.nice-select:hover{
+    border-color: #1BB3DA !important;
+}
+
+.select {
+    border-bottom: 1.7px solid #3A3A3C;
+    border-right: 1.7px solid #3A3A3C;
+    content: '';
+    height: 8px;
+    width: 8px;
+    margin-top: -4px;
+    pointer-events: none;
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform-origin: 66% 66%;
+    transform: rotate(45deg);
+    transition: all 0.15s ease-in-out;
+}

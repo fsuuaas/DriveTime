@@ -7,7 +7,7 @@
                     <div class="logo-box flex">
                         <div class="logo">
                             <a href="{{route('index')}}">
-                                <img src="{{asset('frontend/assets/images/Mediamodifier-Design(6).png')}}" style="height:40px;"
+                                <img src="{{asset('frontend/assets/images/logo-default-416x96.png')}}" style="height:50px;"
                                                                             alt="Logo222222222222222222222"></a>
                         </div>
                     </div>

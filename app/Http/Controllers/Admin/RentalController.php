@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\RentalStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Mail\RentalBookingAdminMail;
+use App\Mail\RentalBookingUserMail;
 use App\Models\Car;
 use App\Models\Rental;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 
 class RentalController extends Controller
@@ -49,7 +54,62 @@ class RentalController extends Controller
     }
 
     public function create(){
-        return view('backend.rentals.create');
+        $cars = Car::all();
+        return view('backend.rentals.create', compact('cars'));
+    }
+
+    public function store(Request $request)
+    {
+      //  dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required|unique:users,phone',
+            'car_id' => 'required|exists:cars,id',
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date|after:start_date',
+            'address' => 'required'
+        ]);
+
+     //  dd($validated);
+
+        $car = Car::find($validated['car_id']);
+        if (!$car) {
+            return response()->json(['error' => 'Car not found'], 404);
+        }
+
+        // Check if car is available in the requested period
+        if (!$car->isAvailableForDates($validated['start_date'], $validated['end_date'])) {
+            return response()->json(['error' => 'Car is not available for the requested dates'], 400);
+        }
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make('P@ssw0rd'),
+            'phone' => $validated['phone'],
+            'address' => $validated['address']
+        ]);
+
+        $rental = Rental::create([
+            'car_id' => $car->id,
+            'user_id' => $user->id,
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'total_cost' => $this->calculateRentalCost($validated['start_date'], $validated['end_date'], $car->daily_rent_price),
+            'status' => RentalStatusEnum::Booked
+        ]);
+
+        $car->markAsUnavailable();
+
+        // Notification process
+        Mail::to($user->email)->send(new RentalBookingUserMail($rental));
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->send(new RentalBookingAdminMail($rental));
+        }
+
+        return redirect()->route('admin.rentals.index')->with('success', 'Booking created successfully!');
     }
 
 

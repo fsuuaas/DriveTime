@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('role');  // [admin, customer]
+            $table->string('role')->default('customer');  // [admin, customer]
             $table->rememberToken();
             $table->timestamps();
         });

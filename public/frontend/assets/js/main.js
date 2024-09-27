@@ -154,8 +154,8 @@
   var retinaLogos = function () {
     var retina = window.devicePixelRatio > 1 ? true : false;
     if (retina) {
-      $('#header .logo').find('img').attr({ src: 'assets/images/logo/logo2@.png', });
-      $('#Footer .widget-info').find('img').attr({ src: 'assets/images/logo/logo-footer@2x.png',});
+      $('#header .logo').find('img').attr({ src: 'frontend/assets/images/Mediamodifier-Design(6).png', });
+      $('#Footer .widget-info').find('img').attr({ src: 'frontend/assets/images/logo-default-416x96.svg',});
     }
   };
 
@@ -350,7 +350,7 @@
     headerFixed();
     video();
     sticky();
-    retinaLogos();
+   // retinaLogos();
      preloader();
     goTop();
     hoverThumbGallery();

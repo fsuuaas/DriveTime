@@ -24,13 +24,12 @@
 
         <!-- Main Header -->
 
-        <header id="header" class="main-header header header-fixed ">
+        <header id="header" class="main-header header header-fixed">
             <!-- Header Lower -->
-            <x-top-bar/>
             <x-menu/>
             <!-- End Header Lower -->
             <!-- Mobile Menu  -->
-            <x-mobile-menu/>
+{{--            <x-mobile-menu/>--}}
             <!-- End Mobile Menu -->
 
         </header>

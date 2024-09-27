@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12 col-12">
         <div class="card-body">
-            <form id="rentalAddForm" class="" action="{{route('admin.rentals.store')}}" method="POST">
+            <form id="customerAddForm" class="" action="{{route('admin.users.store')}}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-12">
@@ -54,46 +54,6 @@
                                             </span>
                                         @endif
                                     </div>
-
-                                    <div class="col-sm-12 col-12 {{ $errors->has('car') ? ' has-error' : '' }}">
-                                        <div class="mb-3">
-                                            <label class="form-label">Car <span class="text-red">*</span></label>
-                                            <select class="form-control" name="car_id" required>
-                                                <option value="">Select Car</option>
-                                                @foreach($cars as $car)
-                                                    <option value="{{$car->id}}">{{$car->name}} | {{$car->model}} | {{$car->brand}} | ${{$car->daily_rent_price}} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @if ($errors->has('address'))
-                                            <span class="help-block">
-                                               <strong>{{ $errors->first('address') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-sm-6 col-12 {{ $errors->has('start_date') ? ' has-error' : '' }}">
-                                        <div class="mb-3">
-                                            <label class="form-label">Start Date<span class="text-red">*</span></label>
-                                            <input type="date" class="form-control" placeholder="Start date" name="start_date">
-                                        </div>
-                                        @if ($errors->has('start_date'))
-                                            <span class="help-block">
-                                                 <strong>{{ $errors->first('start_date') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="col-sm-6 col-12 {{ $errors->has('end_date') ? ' has-error' : '' }}">
-                                        <div class="mb-3">
-                                            <label class="form-label">End Date<span class="text-red">*</span></label>
-                                            <input type="date" class="form-control" placeholder="End date" name="end_date">
-                                        </div>
-                                        @if ($errors->has('end_date'))
-                                            <span class="help-block">
-                                                 <strong>{{ $errors->first('end_date') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +66,6 @@
 <!-- Row end -->
 <script type="text/javascript">
     document.getElementById('saveChangesBtn').addEventListener('click', function() {
-        document.getElementById('rentalAddForm').submit();
+        document.getElementById('customerAddForm').submit();
     });
 </script>

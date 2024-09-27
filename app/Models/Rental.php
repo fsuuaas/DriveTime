@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RentalStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,8 @@ class Rental extends Model
 
     protected $casts = [
         'status' => RentalStatusEnum::class,
+        'start_date' => 'date',
+        'end_date' => 'date',
     ];
 
     protected static function boot() {
@@ -55,6 +58,32 @@ class Rental extends Model
         } while (self::where('rental_uid', $newUID)->exists());
 
         return $newUID;
+    }
+
+    public function updateStatusBasedOnDate()
+    {
+        $today = now()->startOfDay();
+
+        $startDate = Carbon::parse($this->start_date);
+        $endDate = Carbon::parse($this->end_date);
+
+        if ($this->status === RentalStatusEnum::Booked && ($startDate->isToday() || $startDate->isPast())) {
+            $this->update(['status' => RentalStatusEnum::Ongoing]);
+        } elseif ($this->status === RentalStatusEnum::Ongoing && $endDate->isPast()) {
+            $this->update(['status' => RentalStatusEnum::Completed]);
+        }
+    }
+
+    // Accessor for start_date to format it as YYYY-MM-DD
+    public function getStartDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
+    // Accessor for end_date to format it as YYYY-MM-DD
+    public function getEndDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
 }

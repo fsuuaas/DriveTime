@@ -5,8 +5,11 @@
                 <div class="inner-container flex justify-space align-center">
                     <!-- Logo Box -->
                     <div class="logo-box flex">
-                        <div class="logo"><a href="{{route('index')}}"><img src="{{asset('frontend/assets/images/logo-default-416x96.svg')}}"
-                                                                            alt="Logo"></a></div>
+                        <div class="logo">
+                            <a href="{{route('index')}}">
+                                <img src="{{asset('frontend/assets/images/Mediamodifier-Design(6).png')}}" style="height:40px;"
+                                                                            alt="Logo222222222222222222222"></a>
+                        </div>
                     </div>
                     <div class="nav-outer flex align-center">
                         <!-- Main Menu -->

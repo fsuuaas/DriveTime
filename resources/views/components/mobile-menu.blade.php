@@ -3,7 +3,7 @@
     <div class="menu-backdrop"></div>
     <nav class="menu-box">
         <div class="nav-logo">
-            <a href="index.html"><img src="{{asset('frontend/assets/images/logo/logo2@.png')}}" alt="Logo Motorx"></a>
+            <a href="index.html"><img src="{{asset('frontend/assets/images/logo-default-416x96.svg')}}" alt="Logo Motorx"></a>
         </div>
         <div class="bottom-canvas">
             <div class="menu-outer">

@@ -123,5 +123,6 @@
     <orderEntry type="library" name="all" level="application" />
     <orderEntry type="library" name="@coreui/coreui" level="application" />
     <orderEntry type="library" name="bootstrap-datepicker" level="application" />
+    <orderEntry type="library" name="bootstrap-icons" level="application" />
   </component>
 </module>

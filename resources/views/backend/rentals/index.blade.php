@@ -124,7 +124,7 @@
                     { data: "actions", name: 'actions', orderable: false, searchable: false }
                 ],
                 initComplete: function () {
-                    $("#RentalsDataTable_filter").append('<select class="form-select" id="status" name="status" aria-label="Default select example" style="margin-left: 5px; margin-right: 5px; max-width: 130px; display:inline"><option value="" selected>Select Status</option><option value="1">Booked</option><option value="2">Ongoing</option> <option value="3">Completed</option><option value="4">Cancelled</option></select><a href="#" id="clickModal" data-title="Create Booking" data-attr="{{ route('admin.rentals.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-dotted" style="font-size: 14px"></i> Create Booking</a>');
+                    $("#RentalsDataTable_filter").append('<select class="form-select" id="status" name="status" aria-label="Default select example" style="margin-left: 5px; margin-right: 5px; max-width: 130px; display:inline"><option value="" selected>Select Status</option><option value="1">Booked</option><option value="2">Ongoing</option> <option value="3">Completed</option><option value="4">Cancelled</option></select><a href="#" id="clickModal" data-title="Create Booking" data-attr="{{ route('admin.rentals.create') }}" data-btn-title="Create Booking" data-btn-color="btn-success" class="btn btn-primary"><i class="bi bi-plus-circle-dotted" style="font-size: 14px"></i> Create Booking</a>');
 
                     $('#status').on('change', function () {
                         $('#RentalsDataTable').DataTable().draw(true);

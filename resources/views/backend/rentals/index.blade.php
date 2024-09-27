@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{{asset('backend/vendor/datatables/dataTables.bs5-custom.css')}}" />
     <style>
         #clickModal {
-            margin-left: 10px;
             max-height: 40px;
             margin-top: -5px;
         }
@@ -48,21 +47,23 @@
                 <!-- Card start -->
                 <div class="card" style="padding: 2rem">
                     <div class="card-header">
-                        <div class="card-title">Cars</div>
+                        <div class="card-title">Rentals</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="CarsDataTable" class="table table-bordered">
+                            <table id="RentalsDataTable" class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Image</th>
-                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Rental UID</th>
+                                    <th class="text-center">Car Name</th>
                                     <th class="text-center">Brand</th>
-                                    <th class="text-center">Model</th>
-                                    <th class="text-center">Year</th>
-                                    <th class="text-center">Type</th>
-                                    <th class="text-center">Daily Price</th>
+                                    <th class="text-center">Customer Name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Start</th>
+                                    <th class="text-center">End</th>
+                                    <th class="text-center">Total Cost</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -94,30 +95,40 @@
                 }
             });
 
-            var codeListTable = $('#CarsDataTable').DataTable({
+            $('#RentalsDataTable').DataTable({
                 "lengthMenu": [[20, 50, 100], [20, 50, 100]],
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
                 order: [[1, 'desc']],
                 ajax: {
-                    url: "{{ route('admin.cars.index') }}",
+                    url: "{{ route('admin.rentals.index') }}",
                     type: 'GET',
+                    data: function (d) {
+                        d.status = $('#status').val(); // Send selected status to the server
+                    }
                 },
                 columns: [
                     { data: 'id', orderable: false, searchable: false },
+
                     { data: 'image', name: 'image' },
-                    { data: 'name', name: 'name' },
-                    { data: 'brand', name: 'brand' },
-                    { data: 'model', name: 'model', orderable: false, searchable: true },
-                    { data: 'year', name: 'year' },
-                    { data: 'car_type', name: 'car_type' },
-                    { data: 'daily_rent_price', name: 'daily_rent_price' },
-                    { data: 'availability', name: 'availability' },
+                    { data: 'rental_uid', name: 'rentals.rental_uid', searchable: true },
+                    { data: 'car_name', name: 'cars.name', searchable: true },
+                    { data: 'brand', name: 'cars.brand', searchable: true },
+                    { data: 'name', name: 'users.name', searchable: true },
+                    { data: 'phone', name: 'users.phone', searchable: true },
+                    { data: 'start_date', name: 'rentals.start_date', searchable: true },
+                    { data: 'end_date', name: 'rentals.end_date', searchable: true },
+                    { data: 'total_cost', name: 'rentals.total_cost', searchable: true },
+                    { data: 'status', name: 'rentals.status', searchable: true },
                     { data: "actions", name: 'actions', orderable: false, searchable: false }
                 ],
                 initComplete: function () {
-                    $("#CarsDataTable_filter").append('<a href="#" id="clickModal" data-title="Add Car" data-attr="{{ route('admin.cars.create') }}" data-btn-title="Save Car" data-btn-color="btn-success" class="btn btn-primary"><i class="bi bi-plus-circle-dotted" style="font-size: 14px"></i> Create</a>');
+                    $("#RentalsDataTable_filter").append('<select class="form-select" id="status" name="status" aria-label="Default select example" style="margin-left: 5px; margin-right: 5px; max-width: 130px; display:inline"><option value="" selected>Select Status</option><option value="1">Booked</option><option value="2">Ongoing</option> <option value="3">Completed</option><option value="4">Cancelled</option></select><a href="#" id="clickModal" data-title="Create Booking" data-attr="{{ route('admin.rentals.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-dotted" style="font-size: 14px"></i> Create Booking</a>');
+
+                    $('#status').on('change', function () {
+                        $('#RentalsDataTable').DataTable().draw(true);
+                    });
                 }
             });
         });

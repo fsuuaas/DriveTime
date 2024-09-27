@@ -7,28 +7,43 @@
                 <div class="title">Register</div>
                 <div class="register-form">
                     <div class="respond-register-form">
-                        <form method="post" class="comment-form form-submit" action="/" accept-charset="utf-8"
+                        <form method="POST" action="{{ route('register') }}" class="comment-form form-submit" accept-charset="utf-8"
                               novalidate="novalidate">
+                            @csrf
                             <fieldset>
-                                <label>User name</label>
-                                <input type="text" class="tb-my-input" name="text" placeholder="User name">
+                                <label>Name</label>
+                                <input type="text" class="tb-my-input @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </fieldset>
                             <fieldset>
-                                <label>Email</label>
-                                <input type="email" class="tb-my-input" name="email" placeholder="Email">
+                                <label>Email Address</label>
+                                <input type="email" class="tb-my-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </fieldset>
                             <fieldset>
                                 <label>Password</label>
-                                <input type="password" class="input-form password-input"
-                                       placeholder="Your password">
+                                <input type="password" class="input-form password-input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </fieldset>
                             <fieldset>
                                 <label>Confirm password</label>
-                                <input type="password" class="input-form password-input"
-                                       placeholder="Confirm password">
+                                <input type="password" class="input-form password-input" placeholder="Confirm password" name="password_confirmation" required autocomplete="new-password">
                             </fieldset>
                             <button class="sc-button" name="submit" type="submit">
-                                <span>Sign Up</span>
+                                <span>Register</span>
                             </button>
                         </form>
                     </div>
@@ -51,20 +66,28 @@
                 <div class="title">Login</div>
                 <div class="register-form">
                     <div class="respond-register-form">
-                        <form method="post" class="comment-form form-submit" action="#" accept-charset="utf-8">
+                        <form method="POST" action="{{ route('login') }}" class="comment-form form-submit" accept-charset="utf-8">
+                            @csrf
                             <fieldset>
-                                <label>Account</label>
-                                <input type="email" id="email" class="tb-my-input" name="email"
-                                       placeholder="Email or user name">
+                                <label>Email</label>
+                                <input type="email" id="email" class="tb-my-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email or user name">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </fieldset>
                             <fieldset>
                                 <label>Password</label>
-                                <input type="password" class="input-form password-input"
-                                       placeholder="Your password">
+                                <input type="password" class="input-form password-input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Your password">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </fieldset>
-                            <div class="title-forgot t-al-right mb-20"><a class="t-al-right"
-                                                                          data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
-                                                                          data-bs-dismiss="modal">Forgot password</a>
+                            <div class="title-forgot t-al-right mb-20">
+                                <a class="t-al-right" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal">Forgot password</a>
                             </div>
                             <button class="sc-button" name="submit" type="submit">
                                 <span>Login</span>

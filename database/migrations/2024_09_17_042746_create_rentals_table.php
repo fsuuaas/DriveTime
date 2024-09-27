@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->decimal('total_cost');
             $table->tinyInteger('status')->default(RentalStatusEnum::Booked);
+            $table->text('remark');
             $table->timestamps();
         });
     }

@@ -26,4 +26,38 @@ class Car extends Model
     {
         return $this->hasMany(Rental::class);
     }
+
+    public function isAvailableForDates($startDate, $endDate)
+    {
+        return !Rental::where('car_id', $this->id)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                        $query->where('start_date', '<', $startDate)
+                            ->where('end_date', '>', $endDate);
+                    });
+            })
+            ->exists();
+    }
+
+    public function isAvailableForDatesExcludingRental($startDate, $endDate, $rentalId)
+    {
+        return !Rental::where('car_id', $this->id)
+            ->where('id', '!=', $rentalId)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                        $query->where('start_date', '<', $startDate)
+                            ->where('end_date', '>', $endDate);
+                    });
+            })
+            ->exists();
+    }
+
+    public function markAsUnavailable()
+    {
+        $this->update(['availability' => 0]);
+    }
 }

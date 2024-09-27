@@ -1,7 +1,7 @@
-    <a href="#" id="clickModal" data-title="Show Car" data-attr="{{ route('admin.cars.show', $model) }}" class="btn btn-outline-primary">
+    <a href="#" id="clickModal" data-title="Show Car" data-attr="{{ route('admin.cars.show', $model) }}" data-btn-title="Save Change" data-btn-color="btn-success" class="btn btn-outline-primary">
         <i class="bi bi-eye"></i>
         View</a>
-    <a class="btn btn-outline-warning" href="#" id="clickModal" data-title="Edit Car" data-attr="{{ route('admin.cars.edit', $model->id) }}"><i class="bi bi-pencil-fill"></i> Edit</a>
+    <a class="btn btn-outline-warning" href="#" id="clickModal" data-title="Edit Car" data-attr="{{ route('admin.cars.edit', $model->id) }}" data-btn-title="Save Changes" data-btn-color="btn-success"><i class="bi bi-pencil-fill"></i> Edit</a>
 
     <form action="{{ route('admin.cars.destroy', $model) }}" method="POST" style="display: inline;">
         @csrf

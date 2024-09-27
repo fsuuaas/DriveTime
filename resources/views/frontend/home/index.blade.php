@@ -481,68 +481,8 @@
 </div>
 <!-- Widget browse-by-mode -->
 
-<!-- Widget Logo -->
-<section class="flat-brand">
-    <div class="themesflat-container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="title-section t-al-center">
-                    <h4 class="wow fadeInUp">our partners & supporters</h4>
-                </div>
-                <div class="swiper-container carousel-5">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slogan-logo">
-                                <a href="#">
-                                    <img src="{{asset('frontend/assets/images/partner/logo-partner.png')}}" alt="images">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Widget Logo -->
-
 <!-- Widget Car List V2 -->
-<div class="widget-car-list-v2">
+<div class="widget-car-list-v2" style="margin-top: 100px">
     <div class="themesflat-container">
         <div class="header-tab mb-46">
             <div class="heading-section">

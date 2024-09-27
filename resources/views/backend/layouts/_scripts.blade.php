@@ -14,19 +14,32 @@
 <script>
     $(document).on('click', '#clickModal', function(event) {
         event.preventDefault();
+
         let href = $(this).attr('data-attr');
         let title = $(this).attr('data-title');
+        let btnTitle = $(this).attr('data-btn-title');
+        let btnColor = $(this).attr('data-btn-color');
+
         $.ajax({
             url: href,
             beforeSend: function() {
                 $('#loader').show();
+                // Reset the modal content and button states
+                $('#modalTitle').html('');
+                $('#saveChangesBtn').html('Save changes');
+                $('#modalContent').empty();
+                // Handle button classes
+                $('#saveChangesBtn').removeClass('btn-success btn-primary btn-danger btn-warning btn-info');
             },
             // return the result
             success: function(result) {
                 $('#modalTitle').html(title);
-                $('#modalView').modal("show");
+                $('#saveChangesBtn').html(btnTitle);
+                if (btnColor) {
+                    $('#saveChangesBtn').addClass(btnColor);
+                }
                 $('#modalContent').html(result).show();
-
+                $('#modalView').modal("show");
             },
             complete: function() {
                 $('#loader').hide();
@@ -40,6 +53,7 @@
         });
     });
 </script>
+
 
 @yield('page-script')
 

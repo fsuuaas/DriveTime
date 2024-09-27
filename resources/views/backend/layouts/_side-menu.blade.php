@@ -28,67 +28,17 @@
                         </ul>
                     </div>
                 </li>
-                <li class="sidebar-dropdown">
-                    <a href="#">
+                <li class="{{ request()->routeIs('admin.cars.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.cars.index')}}">
                         <i class="bi bi-car-front"></i>
                         <span class="menu-text">Car</span>
                     </a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li>
-                                <a href="{{route('admin.cars.index')}}">Cars</a>
-                            </li>
-                            <li>
-                                <a href="products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="view-cart.html">Shopping Cart</a>
-                            </li>
-                            <li>
-                                <a href="checkout.html">Billing Details</a>
-                            </li>
-                            <li>
-                                <a href="customers.html">Customers</a>
-                            </li>
-                            <li>
-                                <a href="add-product.html">Add Product</a>
-                            </li>
-                            <li>
-                                <a href="reviews.html">Reviews</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
-                <li class="sidebar-dropdown">
-                    <a href="#">
+                <li class="{{ request()->routeIs('admin.rentals.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.rentals.index')}}">
                         <i class="bi bi-handbag"></i>
-                        <span class="menu-text">Product</span>
+                        <span class="menu-text">Rentals</span>
                     </a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li>
-                                <a href="orders.html">Order History</a>
-                            </li>
-                            <li>
-                                <a href="products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="view-cart.html">Shopping Cart</a>
-                            </li>
-                            <li>
-                                <a href="checkout.html">Billing Details</a>
-                            </li>
-                            <li>
-                                <a href="customers.html">Customers</a>
-                            </li>
-                            <li>
-                                <a href="add-product.html">Add Product</a>
-                            </li>
-                            <li>
-                                <a href="reviews.html">Reviews</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 <li class="sidebar-dropdown">
                     <a href="#">

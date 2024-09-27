@@ -43,8 +43,7 @@
 
         <!-- Content wrapper scroll start -->
         <div class="content-wrapper-scroll">
-
-            <!-- Content wrapper start -->
+                        <!-- Content wrapper start -->
            @yield('main')
             <!-- Content wrapper end -->
 

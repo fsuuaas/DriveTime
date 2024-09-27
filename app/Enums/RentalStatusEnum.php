@@ -42,21 +42,18 @@ enum RentalStatusEnum: int
     public function getLabelColor(): string
     {
         return match ($this) {
-            self::Booked => 'bg-label-primary',
-            self::Ongoing => 'bg-label-warning',
-            self::Completed => 'bg-label-success',
-            self::Cancelled => 'bg-label-danger'
+            self::Booked => 'shade-blue',
+            self::Ongoing => 'shade-yellow',
+            self::Completed => 'shade-green',
+            self::Cancelled => 'shade-red'
         };
     }
 
-    //use <span @class(['badge', 'bg-primary' => $employee->status->Active, 'bg-warning' => $employee->status->Resigned, 'bg-danger' => $employee->status->Terminated])>{{$employee->status}}</span>
-
     public function getLabelHTML(): string
     {
-        return sprintf('<span class="badge rounded-pill %s">%s</span>', $this->getLabelColor(), $this->getLabelText());
+        return sprintf('<span class="badge %s">%s</span>', $this->getLabelColor(), $this->getLabelText());
     }
 
-    //use {!! $employee->status->getLabelHTML() !!}
 
     public static function options(): array
     {

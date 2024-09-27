@@ -150,7 +150,7 @@
                                         </a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="#" class="icon-service">
+                                        <a href="/customer/car/${car.id}/booking" class="icon-service booking-link">
                                             <i class="icon-Group-3"></i> Book Now
                                         </a>
                                     </div>

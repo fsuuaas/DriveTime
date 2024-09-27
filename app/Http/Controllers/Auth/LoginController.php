@@ -38,8 +38,8 @@ class LoginController extends Controller
     {
         return match (true) {
             $user->isAdmin()       =>  route('admin.dashboard'),
-            $user->isCustomer()    =>  route('home'),
-            default                =>  route('login'),
+            $user->isCustomer()    =>  route('customer.dashboard'),
+            default                =>  route('index'),
         };
     }
 
@@ -60,6 +60,6 @@ class LoginController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
 
-        return redirect('/');
+        return redirect()->route('index');
     }
 }

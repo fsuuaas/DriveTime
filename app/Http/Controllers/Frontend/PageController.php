@@ -19,6 +19,11 @@ class PageController extends Controller
         return view('frontend.home.index', compact('cars', 'brands', 'models', 'years', 'types'));
     }
 
+    public function cars(){
+        $cars = Car::all();
+        return view('frontend.cars.index', compact('cars'));
+    }
+
     public function getCars(Request $request)
     {
         $query = Car::query();
@@ -44,10 +49,36 @@ class PageController extends Controller
         return response()->json($cars);
     }
 
+    public function getCars1(Request $request)
+    {
+        $query = Car::query();
+
+        if ($request->filled('brand')) {
+            $query->where('brand', $request->brand);
+        }
+        if ($request->filled('model')) {
+            $query->where('model', $request->model);
+        }
+        if ($request->filled('type')) {
+            $query->where('car_type', $request->type);
+        }
+        if ($request->filled('year')) {
+            $query->where('year', $request->year);
+        }
+        if ($request->filled('price')) {
+            $query->where('daily_rent_price', '<=', $request->price);
+        }
+
+        $cars = $query->paginate(10); // Adjust the '10' to however many items per page you want
+
+        return response()->json($cars);
+    }
+
+
 
     public function about(): View
     {
-        return view('about');
+        return view('frontend.about.index');
     }
 
     public function contact(): View
@@ -62,6 +93,10 @@ class PageController extends Controller
 
     public function carDetails($id): View{
         $car = Car::findOrfail($id);
-        return view('frontend.cars.details', compact('car'));
+        $otherCars = Car::where('id', '!=', $id)
+            ->inRandomOrder()
+            ->take(9)
+            ->get();
+        return view('frontend.cars.details', compact('car','otherCars'));
     }
 }

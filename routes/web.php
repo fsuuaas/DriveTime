@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Frontend\CustomerDashboardController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\RentalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,21 +15,23 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/rentals', [PageController::class, 'rentals'])->name('rentals');
 Route::get('/car/details/{id}', [PageController::class, 'carDetails'])->name('car.details');
-
+Route::get('/cars1', [PageController::class, 'cars'])->name('cars');
 Route::get('/cars/all', [PageController::class, 'getCars'])->name('cars.all');
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout.custom');
 
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('cars', CarController::class)->names('admin.cars');
-    Route::get('/get/car-list', [CarController::class, 'carList'])->name('admin.cars.list');
-    Route::get('/car/view/{id}', [CarController::class, 'view'])->name('admin.car.view');
+
+
+Route::group(['middleware' => ['auth', 'customer', 'check.auth'], 'prefix' => 'customer'], function () {
+    Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
+    Route::get('/car/{id}/booking', [RentalController::class, 'bookingForm'])->name('customer.rental.booking.from');
+    Route::post('/car/{id}/booking', [RentalController::class, 'booking'])->name('customer.rental.booking');
 });
+
+//require base_path('routes/admin.php');
+require __DIR__ . '/admin.php';

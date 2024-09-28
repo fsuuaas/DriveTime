@@ -31,6 +31,11 @@ Route::group(['middleware' => ['auth', 'customer', 'check.auth'], 'prefix' => 'c
     Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
     Route::get('/car/{id}/booking', [RentalController::class, 'bookingForm'])->name('customer.rental.booking.from');
     Route::post('/car/{id}/booking', [RentalController::class, 'booking'])->name('customer.rental.booking');
+    Route::get('/rentals', [RentalController::class, 'index'])->name('customer.rentals');
+    Route::get('/rentals/cancel/{id}', [RentalController::class, 'getCancel'])->name('customer.rentals.get-cancel');
+    Route::post('/rentals/cancel/{id}', [RentalController::class, 'cancel'])->name('customer.rentals.cancel');
+    Route::get('/rentals/edit/{id}', [RentalController::class, 'edit'])->name('customer.rentals.edit');
+    Route::post('/rentals/update', [RentalController::class, 'update'])->name('customer.rentals.update');
 });
 
 //require base_path('routes/admin.php');

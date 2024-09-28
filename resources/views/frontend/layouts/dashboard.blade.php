@@ -10,6 +10,21 @@
 
     <!-- Theme Style -->
     @include('frontend.layouts.styles')
+    <style>
+        .nav-link {
+            color: #fe4545;
+        }
+
+        .nav-link:hover {
+            color: #57C257;
+        }
+
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #57C257;
+            background-color: unset;
+        }
+
+    </style>
 </head>
 
 <body class="body counter-scroll">
@@ -26,7 +41,6 @@
 
         <header id="header" class="main-header header header-fixed ">
             <!-- Header Lower -->
-            <x-top-bar/>
             <x-menu/>
             <!-- End Header Lower -->
             <!-- Mobile Menu  -->
@@ -36,13 +50,14 @@
         </header>
         <!-- End Main Header -->
 
-        <div class="themesflat-container" style="margin-top: 100px; margin-bottom: 100px">
-            <div class="row">
-                <div class="col-md-3">
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <x-dashboard-menu />
                 </div>
-                <div class="col-md-9">
-                   @yield('main')
+                <div class="col py-3">
+                    <x-alert-backend />
+                    @yield('main')
                 </div>
             </div>
         </div>

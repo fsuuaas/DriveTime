@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Mail\RentalBookingUserMail;
 use App\Mail\RentalBookingAdminMail;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\Facades\DataTables;
 
 class RentalController extends Controller
 {
@@ -37,7 +38,7 @@ class RentalController extends Controller
 
         // Check if car is available in the requested period
         if (!$car->isAvailableForDates($validated['startDate'], $validated['endDate'])) {
-            return response()->json(['error' => 'Car is not available for the requested dates'], 400);
+            return redirect()->route('customer.dashboard')->with('error', 'Car is not available for the requested dates!');
         }
 
         $user = auth()->user();
@@ -62,11 +63,7 @@ class RentalController extends Controller
         foreach ($admins as $admin) {
             Mail::to($admin->email)->send(new RentalBookingAdminMail($rental));
         }
-
-        return response()->json([
-            'message' => 'Booking successful!',
-            'rental' => $rental
-        ]);
+        return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully!');
     }
 
 
@@ -80,5 +77,107 @@ class RentalController extends Controller
         $totalCost = $totalDays * $dailyRentPrice;
         return round($totalCost, 2);
     }
+
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $model = Rental::with('car','user')
+                ->join('cars', 'rentals.car_id', '=', 'cars.id')
+                ->join('users', 'rentals.user_id', '=', 'users.id')
+                ->select('rentals.*', 'cars.name as car_name', 'cars.brand as brand', 'cars.image as image','users.name as name', 'users.phone as phone')
+                ->where('rentals.user_id', auth()->id());
+
+
+            if ($request->has('status') && !empty($request->input('status'))) {
+                $model->where('rentals.status', $request->input('status'));
+            }
+
+
+            return DataTables::eloquent($model)
+                ->addColumn('image', function ($model) {
+                    return '<div class="car-img">
+                                <img src="' . asset($model->image) . '" alt="Bootstrap Gallery">
+                            </div>';
+                })
+                ->addColumn('total_cost', function ($model) {
+                    return "$" . number_format($model->total_cost, 2);
+                })
+                ->addColumn('status', function ($model) {
+                    return $model->status->getLabelHTML();
+                })
+                ->addColumn('actions', function ($model) {
+                    return view('frontend.dashboard._actions', compact('model'));
+                })
+                ->rawColumns(['image','status','actions'])
+                ->toJson();
+        }
+
+        return view('frontend.dashboard.rentals');
+    }
+
+    public function getCancel($id){
+        $rental = Rental::find($id);
+        return view('frontend.dashboard.cancel', compact('rental'));
+    }
+
+    public function cancel(Request $request, $id){
+        $request->validate([
+            'remark' => 'required|string',
+        ]);
+
+        $rental = Rental::findOrFail($id);
+
+        $rental->update([
+            'remark' => $request->remark,
+            'status' => RentalStatusEnum::Cancelled
+        ]);
+
+        return redirect()->route('customer.dashboard')->with('success', 'Rental cancelled successfully!');
+    }
+
+    public function edit($id)
+    {
+        $cars = Car::all();
+        $rental = Rental::with('car')->find($id);
+        return view('frontend.dashboard.edit', compact('rental', 'cars'));
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'rental_id' => 'required|exists:rentals,id',
+            'car_id' => 'required|exists:cars,id',
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        //  dd($validated);
+
+        $rental = Rental::find($validated['rental_id']);
+
+        $car = Car::find($validated['car_id']);
+        if (!$car) {
+            return redirect()->route('customer.rentals')->with('error', 'Car not found!');
+        }
+
+        // Check if car is available in the requested period, excluding the current rental
+        if (!$car->isAvailableForDatesExcludingRental($validated['start_date'], $validated['end_date'], $rental->id)) {
+            return redirect()->route('customer.rentals')->with('error', 'Car is not available for the requested dates!');
+        }
+
+
+        // Update the rental
+        $rental->update([
+            'car_id' => $validated['car_id'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'total_cost' => $this->calculateRentalCost($validated['start_date'], $validated['end_date'], $car->daily_rent_price)
+        ]);
+
+        $car->markAsUnavailable();
+
+        return redirect()->route('customer.rentals')->with('success', 'Booking updated successfully!');
+    }
+
 
 }

@@ -8271,7 +8271,7 @@ a.mapboxgl-ctrl-logo {
   max-width: 326px;
   width: 100%;
   padding: 0px 34px;
-  background-color: #0A1426;
+  background-color: #88A3D3;
   height: 100vh;
   z-index: 100;
   position: relative;
@@ -8360,13 +8360,13 @@ a.mapboxgl-ctrl-logo {
 }
 
 .has-dashboard {
-  margin-left: 326px;
-  background-color: #0A1426;
-  padding-left: 30px;
-  padding-right: 86px;
+  /*margin-left: 326px;*/
+  /*background-color: #0A1426;*/
+  /*padding-left: 30px;*/
+  /*padding-right: 86px;*/
 }
 .has-dashboard .main-header {
-  background-color: #0A1426;
+  /*background-color: #0A1426;*/
 }
 .has-dashboard .main-header .main-menu .navigation > li > a {
   color: #ffffff;

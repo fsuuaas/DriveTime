@@ -1,4 +1,5 @@
 @extends('backend.layouts.index')
+@section('title') Manage Rentals @endsection
 @section('page-style')
     <!-- Data Tables -->
     <link rel="stylesheet" href="{{asset('backend/vendor/datatables/dataTables.bs5.css')}}" />
@@ -32,10 +33,10 @@
     </style>
 @stop
 @section('title')
-    Cars
+    Rentals
 @endsection
 @section('breadcrumb')
-    Cars
+    Rentals
 @endsection
 
 @section('main')
@@ -54,7 +55,6 @@
                             <table id="RentalsDataTable" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Image</th>
                                     <th class="text-center">Rental UID</th>
                                     <th class="text-center">Car Name</th>
@@ -65,7 +65,7 @@
                                     <th class="text-center">End</th>
                                     <th class="text-center">Total Cost</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-left">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -100,7 +100,7 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                order: [[1, 'desc']],
+                order: [[2, 'desc']],
                 ajax: {
                     url: "{{ route('admin.rentals.index') }}",
                     type: 'GET',
@@ -109,8 +109,6 @@
                     }
                 },
                 columns: [
-                    { data: 'id', orderable: false, searchable: false },
-
                     { data: 'image', name: 'image' },
                     { data: 'rental_uid', name: 'rentals.rental_uid', searchable: true },
                     { data: 'car_name', name: 'cars.name', searchable: true },

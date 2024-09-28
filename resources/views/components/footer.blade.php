@@ -13,7 +13,7 @@
         <div class="row footer-main">
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="widget widget-info">
-                    <img src="{{asset('frontend/assets/images/logo/logo2.png')}}" alt="Logo Footer">
+                    <img src="{{asset('frontend/assets/images/logo-default-416x96.png')}}" alt="Logo Footer">
                     <p>The world’s first and largest digital market for crypto collectibles and non-fungible
                         (NFTs). Buy</p>
                     <ul>

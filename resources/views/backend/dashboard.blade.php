@@ -1,5 +1,5 @@
 @extends('backend.layouts.index')
-
+@section('title') Admin Dashboard @endsection
 @section('main')
 <div class="content-wrapper">
 
@@ -8,44 +8,45 @@
         <div class="col-xxl-3 col-sm-6 col-12">
             <div class="stats-tile">
                 <div class="sale-icon shade-red">
-                    <i class="bi bi-pie-chart"></i>
+
+                    <i class="bi bi-car-front"></i>
                 </div>
                 <div class="sale-details">
-                    <h3 class="text-red">250k</h3>
-                    <p>Sales</p>
+                    <h3 class="text-red">{{$car_count}}</h3>
+                    <p>Total Cars</p>
                 </div>
             </div>
         </div>
         <div class="col-xxl-3 col-sm-6 col-12">
             <div class="stats-tile">
                 <div class="sale-icon shade-blue">
-                    <i class="bi bi-emoji-smile"></i>
+                    <i class="bi bi-car-front-fill"></i>
                 </div>
                 <div class="sale-details">
-                    <h3 class="text-blue">24m</h3>
-                    <p>Customers</p>
+                    <h3 class="text-blue">{{$car_available}}</h3>
+                    <p>Available Cars</p>
                 </div>
             </div>
         </div>
         <div class="col-xxl-3 col-sm-6 col-12">
             <div class="stats-tile">
                 <div class="sale-icon shade-yellow">
-                    <i class="bi bi-box-seam"></i>
+                    <i class="bi bi-pie-chart"></i>
                 </div>
                 <div class="sale-details">
-                    <h3 class="text-yellow">15k</h3>
-                    <p>Products</p>
+                    <h3 class="text-yellow">{{$total_rental}}</h3>
+                    <p>Total Rental</p>
                 </div>
             </div>
         </div>
         <div class="col-xxl-3 col-sm-6 col-12">
             <div class="stats-tile">
                 <div class="sale-icon shade-green">
-                    <i class="bi bi-handbag"></i>
+                    <i class="bi bi-cash-stack"></i>
                 </div>
                 <div class="sale-details">
-                    <h3 class="text-green">180m</h3>
-                    <p>Revenue</p>
+                    <h3 class="text-green">${{$total_income}}</h3>
+                    <p>Rental Revenue</p>
                 </div>
             </div>
         </div>

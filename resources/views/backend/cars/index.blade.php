@@ -1,4 +1,5 @@
 @extends('backend.layouts.index')
+@section('title') Manage Cars @endsection
 @section('page-style')
     <!-- Data Tables -->
     <link rel="stylesheet" href="{{asset('backend/vendor/datatables/dataTables.bs5.css')}}" />

@@ -28,9 +28,21 @@
                                 <a data-bs-toggle="modal" href="#exampleModalToggle" role="button">Register</a>
                                 <a data-bs-toggle="modal" href="#exampleModalToggle2" role="button">Login</a>
                                 @else
-                                <a href="{{ route('customer.dashboard')}}" style="font-size: 16px; font-weight: bolder">
-                                    <img src="{{asset('frontend/assets/images/avatar/avt.png')}}" alt="" style="margin-right: 10px"> Dashboard
-                                </a>
+                                    <div class="dropdown">
+                                        <a href="#" class="d-flex align-items-center text-danger text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{asset('frontend/assets/images/avatar/avt.png')}}" alt="hugenerd" style="width: 50px; height: 50px;" class="rounded-circle">
+                                            <span class="d-none d-sm-inline mx-1">{{ Auth::user()->name}}</span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                            <li><a class="dropdown-item" href="{{ route('customer.dashboard')}}">Dashboard</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('customer.rentals')}}">My Rentals</a></li>
+                                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="{{route('logout.custom')}}">Sign out</a></li>
+                                        </ul>
+                                    </div>
                                 @endguest
                             </div>
                         </div>

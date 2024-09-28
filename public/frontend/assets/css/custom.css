@@ -117,3 +117,8 @@
     transform: rotate(45deg);
     transition: all 0.15s ease-in-out;
 }
+
+.header-account .register a:not(:last-child)::after {
+    content: "";
+    font-size: 25px;
+}

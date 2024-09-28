@@ -14,4 +14,4 @@
 <link rel="shortcut icon" href="{{asset('backend/images/favicon.svg')}}">
 
 <!-- Title -->
-<title>@yield('title') | DriveTime</title>
+<title>@yield('title') | DriveTime - Car Rental Service</title>

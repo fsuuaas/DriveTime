@@ -2,7 +2,7 @@
 
     <!-- Sidebar brand starts -->
     <div class="sidebar-brand">
-        <a href="index.html" class="logo">
+        <a href="{{route('admin.dashboard')}}" class="logo">
             <img src="{{asset('frontend/assets/images/logo-default-416x96.svg')}}" alt="Admin Dashboards" />
         </a>
     </div>
@@ -13,7 +13,7 @@
         <div class="sidebarMenuScroll">
             <ul>
                 <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    <a href="#">
+                    <a href="{{route('admin.dashboard')}}">
                         <i class="bi bi-house"></i>
                         <span class="menu-text">Dashboards</span>
                     </a>
